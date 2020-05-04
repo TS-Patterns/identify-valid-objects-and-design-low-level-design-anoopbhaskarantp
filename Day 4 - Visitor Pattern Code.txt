@@ -1,0 +1,103 @@
+ //****************VISITORS**********************
+
+    public interface IOfferAdder
+    {
+        // Note : the method name can be diffent 
+        void AddOffer(SilverCard silverCard);
+        void AddOffer(GoldCard goldCard);
+        void AddOffer(PlatinumCard platinumCard);
+    }
+
+    public class FoodOffer : IOfferAdder
+    {
+        public void AddOffer(SilverCard silverCard)
+        {
+            Console.WriteLine("Food offer for " + nameof(silverCard) + " is 5%");
+        }
+
+        public void AddOffer(GoldCard goldCard)
+        {
+            Console.WriteLine("Food offer  for " + nameof(goldCard) + " is 10%");
+        }
+
+        public void AddOffer(PlatinumCard platinumCard)
+        {
+            Console.WriteLine("Food offer  for " + nameof(platinumCard) + " is 20%");
+        }
+    }
+
+    public class MovieOffer : IOfferAdder
+    {
+        public void AddOffer(SilverCard silverCard)
+        {
+            Console.WriteLine("Movie offer for " + nameof(silverCard) + " 0%");
+        }
+
+        public void AddOffer(GoldCard goldCard)
+        {
+            Console.WriteLine("Movie offer for " + nameof(goldCard) + " 1%");
+        }
+
+        public void AddOffer(PlatinumCard platinumCard)
+        {
+            Console.WriteLine("Movie offer for " + nameof(platinumCard) + " 2%");
+        }
+    }
+
+
+//**************************Cards*********************
+public interface ICreditCard
+    {
+
+        void AcceptOffer(IOfferAdder offer);
+    }
+
+    public class SilverCard : ICreditCard
+    {
+        public void AcceptOffer(IOfferAdder offer)
+        {
+            offer.AddOffer(this);
+        }        
+    }
+
+    public class GoldCard : ICreditCard
+    {
+        public void AcceptOffer(IOfferAdder offer)
+        {
+            offer.AddOffer(this);
+        }
+    }
+
+    public class PlatinumCard : ICreditCard
+    {
+        public void AcceptOffer(IOfferAdder offer)
+        {
+            offer.AddOffer(this);
+        }
+    }
+
+
+
+//********************Clients***************************
+
+        private void HotelClientInteraction(object sender, RoutedEventArgs e)
+        {
+            FoodOffer CardOffer = new FoodOffer();
+
+            CardOffer.AddOffer(new SilverCard());
+            CardOffer.AddOffer(new GoldCard());
+            CardOffer.AddOffer(new PlatinumCard());
+        }
+
+        private void TheaterClientInteraction(object sender, RoutedEventArgs e)
+        {
+            MovieOffer CardOffer = new MovieOffer();
+
+            CardOffer.AddOffer(new SilverCard());
+            CardOffer.AddOffer(new GoldCard());
+            CardOffer.AddOffer(new PlatinumCard());
+        }
+
+
+
+
